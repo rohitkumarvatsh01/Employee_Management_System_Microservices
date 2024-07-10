@@ -1,13 +1,14 @@
-package com.departmentservice.Department_Service.controller;
+package com.departmentservice.controller;
 
-import com.departmentservice.Department_Service.model.Department;
-import com.departmentservice.Department_Service.service.DepartmentService;
+import com.departmentservice.model.Department;
+import com.departmentservice.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/department")

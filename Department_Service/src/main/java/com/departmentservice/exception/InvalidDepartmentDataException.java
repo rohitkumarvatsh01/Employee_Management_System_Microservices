@@ -1,4 +1,4 @@
-package com.departmentservice.Department_Service.exception;
+package com.departmentservice.exception;
 
 public class InvalidDepartmentDataException extends RuntimeException{
     public InvalidDepartmentDataException(String message){

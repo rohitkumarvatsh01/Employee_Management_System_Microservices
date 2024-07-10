@@ -1,9 +1,7 @@
-package com.departmentservice.Department_Service.model;
+package com.departmentservice.model;
 
 import jakarta.persistence.*;
-import org.springframework.beans.factory.support.GenericBeanDefinition;
 
-import javax.annotation.processing.Generated;
 
 @Entity
 @Table(name="Department")

@@ -1,6 +1,7 @@
-package com.departmentservice.Department_Service.repository;
+package com.departmentservice.repository;
 
-import com.departmentservice.Department_Service.model.Department;
+
+import com.departmentservice.model.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

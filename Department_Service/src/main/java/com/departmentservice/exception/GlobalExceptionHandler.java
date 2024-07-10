@@ -1,4 +1,4 @@
-package com.departmentservice.Department_Service.exception;
+package com.departmentservice.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

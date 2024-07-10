@@ -1,4 +1,4 @@
-package com.departmentservice.Department_Service.exception;
+package com.departmentservice.exception;
 
 public class DepartmentNotFoundException extends RuntimeException{
 

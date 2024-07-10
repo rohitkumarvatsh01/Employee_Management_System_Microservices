@@ -1,10 +1,9 @@
-package com.departmentservice.Department_Service.service;
+package com.departmentservice.service;
 
-import com.departmentservice.Department_Service.exception.DepartmentNotFoundException;
-import com.departmentservice.Department_Service.exception.InvalidDepartmentDataException;
-import com.departmentservice.Department_Service.model.Department;
-import com.departmentservice.Department_Service.repository.DepartmentRepository;
-import org.slf4j.Logger;
+import com.departmentservice.exception.DepartmentNotFoundException;
+import com.departmentservice.exception.InvalidDepartmentDataException;
+import com.departmentservice.model.Department;
+import com.departmentservice.repository.DepartmentRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,6 +66,7 @@ public class DepartmentService {
         if (optionalDepartment.isPresent()) {
             Department existingDepartment = optionalDepartment.get();
             existingDepartment.setDept_name(department.getDept_name());
+            validateDepartmentData(existingDepartment);
             logger.info("Updated department with ID: {}", deptId);
             return departmentRepository.save(existingDepartment);
         } else {
