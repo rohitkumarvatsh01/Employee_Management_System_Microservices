@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long dept_id;
 
     @Column(name="dept_name")
