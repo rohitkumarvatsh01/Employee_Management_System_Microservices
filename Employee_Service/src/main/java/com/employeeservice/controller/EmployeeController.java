@@ -1,11 +1,14 @@
 package com.employeeservice.controller;
 
+import com.employeeservice.dto.DepartmentDTO;
 import com.employeeservice.model.Employee;
+import com.employeeservice.repository.EmployeeRepository;
 import com.employeeservice.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -15,6 +18,24 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @GetMapping("/rest/{id}")
+    public Employee getEmployeeById(@PathVariable Long id) {
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        if (employee != null) {
+            // Assuming department ID is same as employee ID for simplicity
+            DepartmentDTO department = restTemplate.getForObject("http://localhost:8082/department/get/" + id, DepartmentDTO.class);
+            // You can add department details to employee if needed
+            // For example: employee.setDepartment(department);
+        }
+        return employee;
+    }
 
     // Create a new record in the table.
     @PostMapping("/create")
