@@ -1,5 +1,6 @@
 package com.employeeservice.controller;
 
+import com.departmentservice.model.Department;
 import com.employeeservice.dto.DepartmentDTO;
 import com.employeeservice.model.Employee;
 import com.employeeservice.repository.EmployeeRepository;
@@ -25,7 +26,7 @@ public class EmployeeController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping("/rest/{id}")
+    /*@GetMapping("/rest/{id}")
     public Employee getEmployeeById(@PathVariable Long id) {
         Employee employee = employeeRepository.findById(id).orElse(null);
         if (employee != null) {
@@ -35,7 +36,14 @@ public class EmployeeController {
             // For example: employee.setDepartment(department);
         }
         return employee;
+    }*/
+
+    @GetMapping("/rest/{empid}")
+    public ResponseEntity<Department> getDepartmentForEmployee(@PathVariable Long empid) {
+        Department department = employeeService.getDepartmentForEmployee(empid);
+        return new ResponseEntity<>(department, HttpStatus.OK);
     }
+
 
     // Create a new record in the table.
     @PostMapping("/create")

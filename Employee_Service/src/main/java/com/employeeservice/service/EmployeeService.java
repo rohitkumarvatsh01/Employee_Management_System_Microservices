@@ -1,12 +1,15 @@
 package com.employeeservice.service;
 
+import com.departmentservice.model.Department;
 import com.employeeservice.exception.EmployeeNotFoundException;
 import com.employeeservice.exception.InvalidEmployeeDataException;
 import com.employeeservice.model.Employee;
 import com.employeeservice.repository.EmployeeRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +21,15 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    public Department getDepartmentForEmployee(Long empId) {
+        String departmentUrl = "http://localhost:8082/department/get/" + empId; // Adjust port and URL as needed
+        ResponseEntity<Department> response = restTemplate.getForEntity(departmentUrl, Department.class);
+        return response.getBody();
+    }
 
     // Create a new record in the table.
     public Employee createNewRecord(Employee employee) {
