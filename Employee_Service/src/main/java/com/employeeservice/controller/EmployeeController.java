@@ -2,7 +2,7 @@ package com.employeeservice.controller;
 
 import com.employeeservice.dto.EmployeeDTO;
 import com.employeeservice.model.Employee;
-import com.employeeservice.service.EmployeeRestTemplate;
+import com.employeeservice.service.EmployeeRestTemplateService;
 import com.employeeservice.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +18,9 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private EmployeeRestTemplateService employeeRestTemplateService;
+
     // Create a new record in the table.
     @PostMapping("/create")
     public ResponseEntity<Employee> createNewRecord(@RequestBody Employee employee) {
@@ -28,28 +31,41 @@ public class EmployeeController {
     // Retrieve all records from the database.
     @GetMapping("/get")
     public ResponseEntity<List<Employee>> getAllRecords() {
-        return new ResponseEntity<>(employeeService.getAllRecords(), HttpStatus.OK);
+        List<Employee> result = employeeService.getAllRecords();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     // Retrieve a record from the database by ID.
     @GetMapping("/get/{empid}")
-    public ResponseEntity<Employee>getRecordById(@PathVariable Long empid){
+    public ResponseEntity<Employee> getRecordById(@PathVariable Long empid) {
         Employee result = employeeService.getRecordById(empid);
-        return new ResponseEntity<>(result, HttpStatus.FOUND);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.FOUND);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     // Update a record in the table by ID.
     @PutMapping("/update/{empid}")
     public ResponseEntity<Employee> updateById(@PathVariable long empid, @RequestBody Employee employee) {
         Employee result = employeeService.updateById(empid, employee);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     // Delete a record from the table by ID.
     @DeleteMapping("/delete/{empid}")
     public ResponseEntity<String> deleteById(@PathVariable long empid) {
         String result = employeeService.deleteById(empid);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        if (result != null) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     // Delete all records from the table.
@@ -59,14 +75,10 @@ public class EmployeeController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @Autowired
-    private EmployeeRestTemplate employeeRestTemplate;
-
-    //Rest Template
-    //Get All Details of Employee with Department Details by Employee ID
-    @GetMapping("/rest/{emp_id}")
-    public ResponseEntity<EmployeeDTO> getEmployeeDepartmentByEmpId(@PathVariable Long emp_id){
-        EmployeeDTO dto = employeeRestTemplate.getEmployeeDepartmentByEmpId(emp_id);
+    // Get Employee details including Department by Employee ID
+    @GetMapping("/department/get/{empid}")
+    public ResponseEntity<EmployeeDTO> getEmployeeDepartmentByEmpId(@PathVariable Long empid){
+        EmployeeDTO dto = employeeRestTemplateService.getEmployeeDepartmentByEmpId(empid);
         if (dto != null) {
             return new ResponseEntity<>(dto, HttpStatus.FOUND);
         } else {
@@ -74,9 +86,11 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/resttemplate")
+
+    // Get All Employee details including Department
+    @GetMapping("/department/get")
     public ResponseEntity<List<EmployeeDTO>>getAllEmployeeDepartment(){
-        List<EmployeeDTO> list=employeeRestTemplate.getAllEmployeeDepartment();
+        List<EmployeeDTO> list=employeeRestTemplateService.getAllEmployeeDepartment();
 
         if(list.isEmpty()){
             return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);

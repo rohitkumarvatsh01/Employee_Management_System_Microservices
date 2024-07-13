@@ -1,6 +1,8 @@
 package com.departmentservice.controller;
 
+import com.departmentservice.dto.DepartmentDTO;
 import com.departmentservice.model.Department;
+import com.departmentservice.service.DepartmentRestTemplateService;
 import com.departmentservice.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,9 @@ public class DepartmentController {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private DepartmentRestTemplateService departmentRestTemplateService;
 
     // Create a new record in the table.
     @PostMapping("/create")
@@ -57,5 +62,29 @@ public class DepartmentController {
     public ResponseEntity<String> deleteAllDepartments() {
         String result = departmentService.deleteAllDepartments();
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    // Get Employee details including Department by Employee ID
+    @GetMapping("/employee/get/{deptid}")
+    public ResponseEntity<DepartmentDTO>getDepartmentEmployeeByEmpId(@PathVariable Long deptid){
+        DepartmentDTO dto=departmentRestTemplateService.getDepartmentEmployeeByEmpId(deptid);
+        if(dto!=null){
+            return new ResponseEntity<>(dto, HttpStatus.FOUND);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // Get All Employee details including Department
+    @GetMapping("/employee/get")
+    public ResponseEntity<List>getAllDepartmentEmployee() {
+        List<DepartmentDTO> list = departmentRestTemplateService.getAllDepartmentEmployee();
+
+        if (list.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity(list, HttpStatus.FOUND);
+        }
     }
 }

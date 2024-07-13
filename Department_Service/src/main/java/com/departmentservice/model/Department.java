@@ -9,17 +9,17 @@ public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long dept_id;
+    private Long deptid;
 
     @Column(name="dept_name")
     private String dept_name;
 
-    public Long getDept_id() {
-        return dept_id;
+    public Long getDeptid() {
+        return deptid;
     }
 
-    public void setDept_id(Long dept_id) {
-        this.dept_id = dept_id;
+    public void setDeptid(Long deptid) {
+        this.deptid = deptid;
     }
 
     public String getDept_name() {
@@ -30,21 +30,19 @@ public class Department {
         this.dept_name = dept_name;
     }
 
-    public Department(Long dept_id, String dept_name) {
-        this.dept_id = dept_id;
+    public Department(){
+
+    }
+
+    public Department(Long deptid, String dept_name) {
+        this.deptid = deptid;
         this.dept_name = dept_name;
     }
-
-    public Department() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 
     @Override
     public String toString() {
         return "Department{" +
-                "dept_id=" + dept_id +
+                "deptid=" + deptid +
                 ", dept_name='" + dept_name + '\'' +
                 '}';
     }
