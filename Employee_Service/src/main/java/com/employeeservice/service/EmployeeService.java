@@ -1,13 +1,13 @@
 package com.employeeservice.service;
 
 import com.departmentservice.model.Department;
+import com.employeeservice.dto.EmployeeDTO;
 import com.employeeservice.exception.EmployeeNotFoundException;
 import com.employeeservice.exception.InvalidEmployeeDataException;
 import com.employeeservice.model.Employee;
 import com.employeeservice.repository.EmployeeRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,15 +21,6 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private RestTemplate restTemplate;
-
-    public Department getDepartmentForEmployee(Long empId) {
-        String departmentUrl = "http://localhost:8082/department/get/" + empId; // Adjust port and URL as needed
-        ResponseEntity<Department> response = restTemplate.getForEntity(departmentUrl, Department.class);
-        return response.getBody();
-    }
 
     // Create a new record in the table.
     public Employee createNewRecord(Employee employee) {
@@ -52,17 +43,15 @@ public class EmployeeService {
             logger.warn("Invalid employee salary: {}", employee.getEmp_salary());
             throw new InvalidEmployeeDataException("Employee salary must be greater than 999");
         }
-        if (employee.getEmp_city() == null || employee.getEmp_city().isEmpty()) {
-            logger.warn("Invalid employee city: {}", employee.getEmp_city());
-            throw new InvalidEmployeeDataException("Employee city is invalid");
+        if (employee.getDept_id() < 0) {
+            logger.warn("Invalid employee department ID: {}", employee.getDept_id());
+            throw new InvalidEmployeeDataException("Employee department ID is invalid");
         }
     }
-
 
     // Retrieve all records from the database.
     public List<Employee> getAllRecords() {
         List<Employee> list = employeeRepository.findAll();
-
         if (list.isEmpty()) {
             logger.info("No employee records found");
             throw new EmployeeNotFoundException("No employee records found");
@@ -75,7 +64,6 @@ public class EmployeeService {
     // Retrieve a record from the database by ID.
     public Employee getRecordById(long empid) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(empid);
-
         if (optionalEmployee.isPresent()) {
             logger.info("Employee found with ID: {}", empid);
             return optionalEmployee.get();
@@ -88,13 +76,12 @@ public class EmployeeService {
     // Update a record in the table by ID.
     public Employee updateById(long empid, Employee employee) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(empid);
-
         if (optionalEmployee.isPresent()) {
             Employee existEmp = optionalEmployee.get();
             existEmp.setEmp_name(employee.getEmp_name());
             existEmp.setEmp_age(employee.getEmp_age());
             existEmp.setEmp_salary(employee.getEmp_salary());
-            existEmp.setEmp_city(employee.getEmp_city());
+            existEmp.setDept_id(employee.getDept_id());
             validateEmployeeData(existEmp);
             logger.info("Updated employee with ID: {}", empid);
             return employeeRepository.save(existEmp);
@@ -129,4 +116,6 @@ public class EmployeeService {
             return "All employee records are deleted";
         }
     }
+
+
 }

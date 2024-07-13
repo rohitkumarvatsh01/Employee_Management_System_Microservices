@@ -1,5 +1,6 @@
 package com.employeeservice.model;
 
+import com.departmentservice.model.Department;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,25 +9,25 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long empid;
+    private Long empid;
 
     @Column(name="emp_name")
     private String emp_name;
 
     @Column(name="emp_age")
-    private int emp_age;
+    private Integer emp_age;
 
     @Column(name="emp_salary")
     private float emp_salary;
 
-    @Column(name="emp_city")
-    private String emp_city;
+    @Column(name="dept_id")
+    private Long dept_id;
 
-    public long getEmpid() {
+    public Long getEmpid() {
         return empid;
     }
 
-    public void setEmpid(long empid) {
+    public void setEmpid(Long empid) {
         this.empid = empid;
     }
 
@@ -38,11 +39,11 @@ public class Employee {
         this.emp_name = emp_name;
     }
 
-    public int getEmp_age() {
+    public Integer getEmp_age() {
         return emp_age;
     }
 
-    public void setEmp_age(int emp_age) {
+    public void setEmp_age(Integer emp_age) {
         this.emp_age = emp_age;
     }
 
@@ -54,31 +55,34 @@ public class Employee {
         this.emp_salary = emp_salary;
     }
 
-    public String getEmp_city() {
-        return emp_city;
+    public Long getDept_id() {
+        return dept_id;
     }
 
-    public void setEmp_city(String emp_city) {
-        this.emp_city = emp_city;
+    public void setDept_id(Long dept_id) {
+        this.dept_id = dept_id;
     }
 
-    public Employee(long empid, String emp_name, int emp_age, float emp_salary, String emp_city) {
-        super();
+    public Employee(){
+
+    }
+
+    public Employee(Long empid, String emp_name, Integer emp_age, float emp_salary, Long dept_id) {
         this.empid = empid;
         this.emp_name = emp_name;
         this.emp_age = emp_age;
         this.emp_salary = emp_salary;
-        this.emp_city = emp_city;
-    }
-
-    public Employee() {
-        super();
-        // TODO Auto-generated constructor stub
+        this.dept_id = dept_id;
     }
 
     @Override
     public String toString() {
-        return "Employee [empid=" + empid + ", emp_name=" + emp_name + ", emp_age=" + emp_age + ", emp_salary="
-                + emp_salary + ", emp_city=" + emp_city + "]";
+        return "Employee{" +
+                "empid=" + empid +
+                ", emp_name='" + emp_name + '\'' +
+                ", emp_age=" + emp_age +
+                ", emp_salary=" + emp_salary +
+                ", dept_id=" + dept_id +
+                '}';
     }
 }
