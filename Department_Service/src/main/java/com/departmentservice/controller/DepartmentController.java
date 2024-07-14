@@ -64,27 +64,26 @@ public class DepartmentController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // Get Employee details including Department by Employee ID
+    // Get Employee details including Department by Department ID
     @GetMapping("/employee/get/{deptid}")
-    public ResponseEntity<DepartmentDTO>getDepartmentEmployeeByEmpId(@PathVariable Long deptid){
-        DepartmentDTO dto=departmentRestTemplateService.getDepartmentEmployeeByEmpId(deptid);
-        if(dto!=null){
-            return new ResponseEntity<>(dto, HttpStatus.FOUND);
-        }
-        else{
+    public ResponseEntity<DepartmentDTO> getDepartmentEmployeeByDeptId(@PathVariable Long deptid) {
+        DepartmentDTO dto = (DepartmentDTO) departmentRestTemplateService.getDepartmentEmployeeByDeptId(deptid);
+        if (dto != null) {
+            return new ResponseEntity<>(dto, HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     // Get All Employee details including Department
     @GetMapping("/employee/get")
-    public ResponseEntity<List>getAllDepartmentEmployee() {
+    public ResponseEntity<List<DepartmentDTO>> getAllDepartmentEmployee() {
         List<DepartmentDTO> list = departmentRestTemplateService.getAllDepartmentEmployee();
 
         if (list.isEmpty()) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity(list, HttpStatus.FOUND);
+            return new ResponseEntity<>(list, HttpStatus.OK);
         }
     }
 }

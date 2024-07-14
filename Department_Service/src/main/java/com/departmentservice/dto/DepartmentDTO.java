@@ -1,9 +1,14 @@
 package com.departmentservice.dto;
 
+import com.employeeservice.dto.EmployeeDTO;
+
+import java.util.List;
+
 public class DepartmentDTO {
 
     private Long deptid;
     private String dept_name;
+
     private Long empid;
     private String emp_name;
     private Integer emp_age;
@@ -55,5 +60,30 @@ public class DepartmentDTO {
 
     public void setEmp_salary(Float emp_salary) {
         this.emp_salary = emp_salary;
+    }
+
+    public DepartmentDTO(){
+
+    }
+
+    public DepartmentDTO(Long deptid, String dept_name, Long empid, String emp_name, Integer emp_age, Float emp_salary) {
+        this.deptid = deptid;
+        this.dept_name = dept_name;
+        this.empid = empid;
+        this.emp_name = emp_name;
+        this.emp_age = emp_age;
+        this.emp_salary = emp_salary;
+    }
+
+    @Override
+    public String toString() {
+        return "DepartmentDTO{" +
+                "deptid=" + deptid +
+                ", dept_name='" + dept_name + '\'' +
+                ", empid=" + empid +
+                ", emp_name='" + emp_name + '\'' +
+                ", emp_age=" + emp_age +
+                ", emp_salary=" + emp_salary +
+                '}';
     }
 }

@@ -8,10 +8,10 @@ import jakarta.persistence.*;
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "deptid")
     private Long deptid;
 
-    @Column(name="dept_name")
+    @Column(name = "dept_name")
     private String dept_name;
 
     public Long getDeptid() {
