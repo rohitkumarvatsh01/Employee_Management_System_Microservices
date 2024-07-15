@@ -8,7 +8,7 @@ public class EmployeeDTO {
     private String emp_name;
     private Integer emp_age;
     private float emp_salary;
-    private Long dept_id;
+    private Long deptid;
     private String dept_name;
 
     public Long getEmpid() {
@@ -43,12 +43,12 @@ public class EmployeeDTO {
         this.emp_salary = emp_salary;
     }
 
-    public Long getDept_id() {
-        return dept_id;
+    public Long getDeptid() {
+        return deptid;
     }
 
-    public void setDept_id(Long dept_id) {
-        this.dept_id = dept_id;
+    public void setDeptid(Long dept_id) {
+        this.deptid = dept_id;
     }
 
     public String getDept_name() {

@@ -1,5 +1,6 @@
 package com.departmentservice.service;
 
+import com.departmentservice.dto.DepartmentDTO;
 import com.departmentservice.exception.DepartmentNotFoundException;
 import com.departmentservice.exception.InvalidDepartmentDataException;
 import com.departmentservice.model.Department;

@@ -20,8 +20,8 @@ public class Employee {
     @Column(name="emp_salary")
     private float emp_salary;
 
-    @Column(name="dept_id")
-    private Long dept_id;
+    @Column(name="deptid")
+    private Long deptid;
 
     public Long getEmpid() {
         return empid;
@@ -55,24 +55,24 @@ public class Employee {
         this.emp_salary = emp_salary;
     }
 
-    public Long getDept_id() {
-        return dept_id;
+    public Long getDeptid() {
+        return deptid;
     }
 
-    public void setDept_id(Long dept_id) {
-        this.dept_id = dept_id;
+    public void setDeptid(Long deptid) {
+        this.deptid = deptid;
     }
 
     public Employee(){
 
     }
 
-    public Employee(Long empid, String emp_name, Integer emp_age, float emp_salary, Long dept_id) {
+    public Employee(Long empid, String emp_name, Integer emp_age, float emp_salary, Long deptid) {
         this.empid = empid;
         this.emp_name = emp_name;
         this.emp_age = emp_age;
         this.emp_salary = emp_salary;
-        this.dept_id = dept_id;
+        this.deptid = deptid;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Employee {
                 ", emp_name='" + emp_name + '\'' +
                 ", emp_age=" + emp_age +
                 ", emp_salary=" + emp_salary +
-                ", dept_id=" + dept_id +
+                ", deptid=" + deptid +
                 '}';
     }
 }

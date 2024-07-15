@@ -40,8 +40,8 @@ public class EmployeeService {
             logger.warn("Invalid employee salary: {}", employee.getEmp_salary());
             throw new InvalidEmployeeDataException("Employee salary must be greater than 999");
         }
-        if (employee.getDept_id() < 0) {
-            logger.warn("Invalid employee department ID: {}", employee.getDept_id());
+        if (employee.getDeptid() == null || employee.getDeptid() <= 0) {
+            logger.warn("Invalid employee department ID: {}", employee.getDeptid());
             throw new InvalidEmployeeDataException("Employee department ID is invalid");
         }
     }
@@ -78,7 +78,7 @@ public class EmployeeService {
             existEmp.setEmp_name(employee.getEmp_name());
             existEmp.setEmp_age(employee.getEmp_age());
             existEmp.setEmp_salary(employee.getEmp_salary());
-            existEmp.setDept_id(employee.getDept_id());
+            existEmp.setDeptid(employee.getDeptid());
             validateEmployeeData(existEmp);
             logger.info("Updated employee with ID: {}", empid);
             return employeeRepository.save(existEmp);
@@ -113,6 +113,4 @@ public class EmployeeService {
             return "All employee records are deleted";
         }
     }
-
-
 }

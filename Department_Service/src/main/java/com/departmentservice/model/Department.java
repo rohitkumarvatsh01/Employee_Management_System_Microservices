@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 public class Department {
 
     @Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "deptid")
     private Long deptid;
 

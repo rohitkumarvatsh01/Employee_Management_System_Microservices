@@ -40,14 +40,14 @@ public class EmployeeRestTemplateService {
             employeeDTO.setEmp_name(employee.getEmp_name());
             employeeDTO.setEmp_age(employee.getEmp_age());
             employeeDTO.setEmp_salary(employee.getEmp_salary());
-            employeeDTO.setDept_id(employee.getDept_id());
+            employeeDTO.setDeptid(employee.getDeptid());
 
             try {
-                Department department = restTemplate.getForObject(departmentServiceURL + "get/" + employee.getDept_id(), Department.class);
+                Department department = restTemplate.getForObject(departmentServiceURL + "get/" + employee.getDeptid(), Department.class);
                 if (department != null) {
                     employeeDTO.setDept_name(department.getDept_name());
                 } else {
-                    logger.warn("Department not found for Department ID: {}", employee.getDept_id());
+                    logger.warn("Department not found for Department ID: {}", employee.getDeptid());
                 }
             } catch (Exception e) {
                 logger.error("Error retrieving department details for Employee ID: {}", empId, e);
@@ -78,14 +78,14 @@ public class EmployeeRestTemplateService {
             employeeDTO.setEmp_name(employee.getEmp_name());
             employeeDTO.setEmp_age(employee.getEmp_age());
             employeeDTO.setEmp_salary(employee.getEmp_salary());
-            employeeDTO.setDept_id(employee.getDept_id());
+            employeeDTO.setDeptid(employee.getDeptid());
 
             try {
-                Department department = restTemplate.getForObject(departmentServiceURL + "get/" + employee.getDept_id(), Department.class);
+                Department department = restTemplate.getForObject(departmentServiceURL + "get/" + employee.getDeptid(), Department.class);
                 if (department != null) {
                     employeeDTO.setDept_name(department.getDept_name());
                 } else {
-                    logger.warn("Department not found for Department ID: {}", employee.getDept_id());
+                    logger.warn("Department not found for Department ID: {}", employee.getDeptid());
                 }
             } catch (Exception e) {
                 logger.error("Error retrieving department details for Employee ID: {}", employee.getEmpid(), e);

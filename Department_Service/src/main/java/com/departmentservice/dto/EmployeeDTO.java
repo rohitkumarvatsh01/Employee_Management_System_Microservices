@@ -1,12 +1,13 @@
 package com.departmentservice.dto;
 
 public class EmployeeDTO {
-
     private Long empid;
     private String emp_name;
     private Integer emp_age;
     private float emp_salary;
+    private Long deptid;
 
+    // Getters and Setters
     public Long getEmpid() {
         return empid;
     }
@@ -37,5 +38,13 @@ public class EmployeeDTO {
 
     public void setEmp_salary(float emp_salary) {
         this.emp_salary = emp_salary;
+    }
+
+    public Long getDeptid() {
+        return deptid;
+    }
+
+    public void setDeptid(Long deptid) {
+        this.deptid = deptid;
     }
 }

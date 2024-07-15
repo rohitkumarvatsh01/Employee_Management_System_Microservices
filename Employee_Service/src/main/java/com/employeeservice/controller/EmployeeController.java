@@ -86,7 +86,6 @@ public class EmployeeController {
         }
     }
 
-
     // Get All Employee details including Department
     @GetMapping("/department/get")
     public ResponseEntity<List<EmployeeDTO>>getAllEmployeeDepartment(){

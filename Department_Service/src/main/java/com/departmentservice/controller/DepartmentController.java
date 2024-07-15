@@ -76,7 +76,7 @@ public class DepartmentController {
     }
 
     // Get All Employee details including Department
-    @GetMapping("/employee/get")
+    /*@GetMapping("/employee/get")
     public ResponseEntity<List<DepartmentDTO>> getAllDepartmentEmployee() {
         List<DepartmentDTO> list = departmentRestTemplateService.getAllDepartmentEmployee();
 
@@ -85,5 +85,5 @@ public class DepartmentController {
         } else {
             return new ResponseEntity<>(list, HttpStatus.OK);
         }
-    }
+    }*/
 }
